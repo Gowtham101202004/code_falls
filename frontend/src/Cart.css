@@ -1,0 +1,319 @@
+.cart-modal {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    z-index: 1000;
+}
+
+.cart-modal h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.cart-items {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px;
+}
+
+.cart-items li {
+    font-size: 1rem;
+    margin: 8px 0;
+}
+
+.total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 15px;
+}
+
+.address-form textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    resize: none;
+}
+
+button {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+button.proceed-btn {
+    background-color: #007bff;
+    color: #fff;
+    margin: 10px 0;
+}
+
+button.pay-btn {
+    background-color: #28a745;
+    color: #fff;
+    margin: 10px 0;
+}
+
+button.close-btn {
+    background-color: #6c757d;
+    color: #fff;
+    margin-top: 15px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.payment-options label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.payment-options input {
+    margin-right: 10px;
+}
+
+@media (max-width: 480px) {
+    .cart-modal {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .cart-modal h3 {
+        font-size: 1.3rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}
+
+.cart-modal {
+    position: fixed;
+    background-color: white;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: Arial, sans-serif;
+}
+
+.cart-items {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-items li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.total {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.proceed-btn, .pay-btn, .close-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.proceed-btn:hover, .pay-btn:hover, .close-btn:hover {
+    background-color: #45a049;
+}
+
+.address-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.payment-options {
+    margin-top: 20px;
+}
+
+.payment-options label {
+    display: block;
+    margin: 10px 0;
+}
+
+.cod-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.cod-popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cod-popup h3 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.cod-popup p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.close-popup-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.close-popup-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cart-modal {
+        width: 90%;
+    }
+
+    .cod-popup-content {
+        width: 80%;
+    }
+
+    .pay-btn, .proceed-btn, .close-btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-modal {
+        width: 95%;
+    }
+
+    .cod-popup-content {
+        width: 90%;
+    }
+
+    .pay-btn, .proceed-btn, .close-btn {
+        font-size: 12px;
+        padding: 10px;
+    }
+}
+
+.cart-modal {
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.cart-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+.total {
+    margin-top: 10px;
+}
+
+.address-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+}
+
+.proceed-btn, .pay-btn, .close-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.payment-options label {
+    display: block;
+    margin: 10px 0;
+}
+
+.empty-cart-msg {
+    font-size: 18px;
+    text-align: center;
+    color: #555;
+}
+
+.cod-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cod-popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .cart-modal {
+        width: 90%;
+    }
+
+    .cart-items {
+        font-size: 14px;
+    }
+}
