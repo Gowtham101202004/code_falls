@@ -69,7 +69,7 @@ header .search-bar button {
 }
 
 .filter-group select, .filter-group input {
-    width: 100%;
+    width: 100%;+
     padding: 8px;
     font-size: large;
     margin-top: 5px;
