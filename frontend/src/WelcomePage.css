@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Russo+One&display=swap');
+
+.slider-container {
+    height: 80vh;
+    width: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-container .list .item {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0 0 0 0;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.slider-container .list .item.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slider-container .list .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider-container .list .item .content {
+    position: absolute;
+    font-family: "Orbitron", serif;
+    top: 10%;
+    width: 100%;
+    max-width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+    color: #fff;
+    text-shadow: 0 5px 10px #0004;
+}
+
+.slider-container .list .item .title{
+    font-size: 5em;
+    font-weight: bold;
+    line-height: 1.3em;
+}
+
+.slider-container .list .item .topic {
+    color: #f1683a;
+    font-size: 5em;
+    font-weight: bold;
+    line-height: 1.3em;
+}
+
+.slider-container .list .item .des{
+    margin-top: 10px;
+    margin-bottom: -10px;
+    padding-right: 40%;
+    font-size: 1.0em;
+    letter-spacing: 1.5px;
+    color: white;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.slider-container .list .item .buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 125px);
+    grid-template-rows: 40px;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.slider-container .list .item .buttons button {
+    padding: 16px 24px;
+    position: relative;
+    font-size: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+    color: white;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    background-image: linear-gradient(45deg, transparent 50%, black 50%);
+    background-size: 300% 200%;
+    background-position: bottom right;
+}
+
+.slider-container .list .item .buttons button:hover {
+    color: black;
+    background-position: top left;
+}
+
+@media only screen and (max-width: 768px) {    
+
+    .slider-container {
+        height: 30vh;
+    }
+
+    .slider-container .list .item .content {
+        padding-right: 0;
+    }
+
+    .slider-container .list .item .content .title {
+        font-size: 20px;
+    }
+    
+    .slider-container .list .item .topic {
+        font-size: 1.2em;
+    }
+    
+    .slider-container .list .item .des{
+        padding-right: 0;
+        font-size: 12px;
+    }
+
+    .slider-container .list .item .buttons {
+        grid-template-columns: repeat(2, 80px);
+        grid-template-rows: 30px;
+    }
+    
+    .slider-container .list .item .buttons button {
+        padding: 10px;
+        font-size: 10px;
+    }
+    
+    .slider-container .list .item .buttons button::after {
+        top: 10px;
+      }
+}

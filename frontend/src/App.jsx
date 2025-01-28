@@ -7,7 +7,7 @@ import AdminDashboard from "./AdminDashboard";
 const App = () => {
   return (
     <Router>
-      <Routes>0 
+      <Routes>
         <Route path="/" element={<AuthPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/admin-dashboard" element={<AdminDashboard/>}/>

@@ -1,0 +1,87 @@
+.Navbar{
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    z-index: 1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.Navbar h1{
+    font-size: xx-large;
+    text-transform: capitalize;
+}
+
+.ms-logo{
+    height: 40px;
+    margin: 15px -110px 0 -80px;
+}
+
+.Nav-Links ul{
+    margin-left: -90px;
+    display: flex;
+    list-style-type: none;
+}
+
+.Nav-Links ul li{
+    margin: 10px 20px 0 0;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+/* underline effects start */
+
+.Navlink {
+    position: relative;
+    text-decoration: none;
+    list-style: none;
+    margin: 8px 6px;
+    color: #000000;
+    transition: transform 0.3s ease;
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+
+.Navlink::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2.5px;
+    left: 0;
+    bottom: 0;
+    background-color: #000000;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-in-out;
+}
+
+.Navlink:hover::after, .Navlink.active::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.Navlink:hover {
+    color: rgb(255, 119, 0);
+}
+
+.Navlink.active {
+    color: rgb(255, 119, 0);
+}
+
+@media only screen and (max-width: 1024px) {
+    .Navbar{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction:column;
+        width: auto;
+        height: auto;
+        padding: 10px;
+    }
+    .Navbar h1{
+        margin-bottom: -2px;
+    }
+
+}
