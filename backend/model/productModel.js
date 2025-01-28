@@ -21,6 +21,10 @@ const productData=new mongoose.Schema(
         category:{
             type:String,
             required:true,
+        },
+        stock:{
+            type:Number,
+            default:0,
         }
     }
 );
