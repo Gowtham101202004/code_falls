@@ -82,7 +82,7 @@ const AuthPage = () => {
         setTimeout(()=>{navigate("/admin-dashboard")},1200);
       }
       else{
-        setTimeout(()=>{navigate("/home")},1500);
+        setTimeout(()=>{navigate("/main/home")},1500);
       }
     }catch(err){
       toast.error(err.response.data.message);

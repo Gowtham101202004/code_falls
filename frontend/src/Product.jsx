@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import './HomePage.css';
+import './Product.css';
 import Cart from './Cart';
 import { toast,ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 import axios from 'axios';
 
-const HomePage = () => {
+const Product = () => {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
     const [category, setCategory] = useState('all');
@@ -41,7 +42,7 @@ const HomePage = () => {
 
     const addToCart = (product) => {
         setCart([...cart, product]);
-        toast.success(product.name + " added to cart!");
+        toast.success(product.name+" added to cart.");
     };
 
     const toggleCart = () => {
@@ -69,6 +70,7 @@ const HomePage = () => {
     };
 
     return (
+        <>
         <div className="app">
             <header className="header">
             {/* <div className="user-info">
@@ -101,7 +103,7 @@ const HomePage = () => {
                         <option value="electronics">Electronics</option>
                         <option value="fashion">Fashion</option>
                         <option value="accessories">Accessories</option>
-                        <option value="home">Home</option>
+                        {/* <option value="home">Home</option> */}
                     </select>
                 </div>
 
@@ -147,7 +149,9 @@ const HomePage = () => {
             )}
             <ToastContainer/>
         </div>
+        </>
+        
     );
 };
 
-export default HomePage;
+export default Product;
