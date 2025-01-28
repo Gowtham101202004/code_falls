@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import Navbar from './Navbar';
 import './WelcomePage.css';
 
 const images = [
   {
     src: 'https://a-static.besthdwallpaper.com/razer-gaming-mouse-wallpaper-2880x1800-82844_8.jpg',
     title: 'GAMING MOUSE',
-    topic: 'Razer gaming mouse',
+    topic: 'RAZER GAMING MOUSE',
     description:
       'Comfortable For Work And Play - Ambidextrous Form Factor With Textured Rubber Side Grips For Productivity And Gaming',
   },
