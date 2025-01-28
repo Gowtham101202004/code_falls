@@ -3,14 +3,13 @@ import './Product.css';
 import Cart from './Cart';
 import { toast,ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
 import axios from 'axios';
 
 const Product = () => {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
     const [category, setCategory] = useState('all');
-    const [priceRange, setPriceRange] = useState(8000); // Max price in INR
+    const [priceRange, setPriceRange] = useState(8000);
     const [cart, setCart] = useState([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [userData, setUserData] = useState({});
@@ -64,7 +63,7 @@ const Product = () => {
 
     const getPriceClass = (currentPrice, previousPrice) => {
         if (previousPrice === 0) {
-            return ''; // No change to show if previousPrice is 0
+            return '';
         }
         return currentPrice > previousPrice ? 'price-increase' : 'price-decrease';
     };
@@ -73,13 +72,9 @@ const Product = () => {
         <>
         <div className="app">
             <header className="header">
-            {/* <div className="user-info">
-                    <span>{userData.name}</span>
-                </div> */}
                 <div className="logo">
                     <h1>Flipazon</h1>
                 </div>
-               
                 <div className="cart" onClick={toggleCart}>
                     <span>Cart: {cart.length} items</span>
                 </div>
@@ -103,7 +98,6 @@ const Product = () => {
                         <option value="electronics">Electronics</option>
                         <option value="fashion">Fashion</option>
                         <option value="accessories">Accessories</option>
-                        {/* <option value="home">Home</option> */}
                     </select>
                 </div>
 
