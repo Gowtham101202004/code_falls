@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import OTPInput from 'react-otp-input';
 import './App.css';
-import { toast, ToastContainer } from "react-toastify"; // Importing toast
-import "react-toastify/dist/ReactToastify.css"; // Importing Toast styles
+import { toast, ToastContainer } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
@@ -42,7 +42,7 @@ const AuthPage = () => {
   
   const handleSendOtp = () => {
     if (!phone || phone.length!=10) {
-      toast.error("Please enter a valid phone number!"); // Error toast for missing phone number
+      toast.error("Please enter a valid phone number!"); 
       return;
     }
     sentSMS(); 
@@ -63,7 +63,7 @@ const AuthPage = () => {
 
   const handleVerifyOtp = () => {
     if (!otp || otp.length!=6) {
-      toast.error("Please enter a valid OTP!"); // Error toast for missing OTP
+      toast.error("Please enter a valid OTP!"); 
       return;
     }
     verifyOTP();
@@ -91,7 +91,7 @@ const AuthPage = () => {
 
   const handleLogin = () => {
     if (!email || !password) {
-      toast.error("Please fill in all fields!"); // Error toast for missing email or password
+      toast.error("Please fill in all fields!"); 
       return;
     }
     else if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
@@ -117,7 +117,7 @@ const AuthPage = () => {
 
   const handleRegister = () => {
     if (!name || !email || !password) {
-      toast.error("Please fill in all fields!"); // Error toast for missing fields
+      toast.error("Please fill in all fields!"); 
       return;
     }
     else if(/^[0-9]/.test(name)){
@@ -207,44 +207,25 @@ const AuthPage = () => {
               </div>
             ) : (
               <div className="auth-form">
-                <label htmlFor="name" className="auth-label">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  type="text"
-                  placeholder="Enter your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="auth-input"
-                />
-                <label htmlFor="email" className="auth-label">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="auth-input"
-                />
-                <label htmlFor="password" className="auth-label">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="auth-input"
-                />
+                <div className="inputBox">
+                  <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                  <span>Name</span>
+                  <i></i>
+                </div>
+                <div className="inputBox">
+                  <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                  <span>Email</span>
+                  <i></i>
+                </div>
+                <div className="inputBox">
+                  <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                  <span>Password</span>
+                  <i></i>
+                </div>
                 <button
                   className="auth-button"
                   onClick={handleRegister}
-                  disabled={!name || !email || !password}
-                >
+                  disabled={!name || !email || !password}>
                   Register
                 </button>
               </div>

@@ -179,16 +179,14 @@ body{
     outline: none;
     background-color: #f5f5f5;
     transition: border-color 0.3s ease;
-  }
-
-  .otp-input-container input:focus {
+}
+.otp-input-container input:focus {
     border-color: #3182ce; 
-  }
-  
-  .otp-input-container input:invalid {
+}
+
+.otp-input-container input:invalid {
     border-color: red; 
-  }
-  
+}
 
 /* Responsive design */
 @media (max-width: 768px) {
@@ -783,6 +781,5 @@ header {
 
 .product-card img {
     width: 100%;
-   
+   }
 }
-
