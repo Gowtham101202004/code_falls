@@ -10,7 +10,7 @@ export default function AdminDashboard() {
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
   const [orders, setOrders] = useState([]);
-  const [newProduct, setNewProduct] = useState({ src: "", name: "", price: "", category: "" });
+  const [newProduct, setNewProduct] = useState({ src: "", name: "", price: "", category: "",stock:"" });
   const [searchProduct, setSearchProduct] = useState("");
   const [productCount, setProductCount] = useState(null);
   const [userCount, setUserCount] = useState(null);
@@ -73,12 +73,13 @@ export default function AdminDashboard() {
         _id: `p${products.length + 1}`,
         name: newProduct.name,
         price: parseFloat(newProduct.price),
-        previousPrice: parseFloat(newProduct.price),  // Store the initial price as previous price
+        previousPrice: parseFloat(newProduct.price),
+        stock:parseInt(newProduct.stock),  // Store the initial price as previous price
       };
       InsertProduct(newProduct);
       setProducts((prev) => [...prev, newProductEntry]);
       setCounts((prev) => ({ ...prev, products: prev.products + 1 }));
-      setNewProduct({ name: "", price: "", src: "", category: "" });
+      setNewProduct({ name: "", price: "", src: "", category: "" ,stock:""});
     }
   };
 
@@ -102,6 +103,7 @@ export default function AdminDashboard() {
       price: productToEdit.price,
       category: productToEdit.category,
       src: productToEdit.src,
+      stock:productToEdit.stock,
     });
     console.log(id);
     setProductToEditId(id);
@@ -117,6 +119,7 @@ export default function AdminDashboard() {
           previousPrice: product.price,  // Update the previous price with the old price
           category: newProduct.category,
           src: newProduct.src,
+          stock: newProduct.stock,
         };
         return updatedProduct;
       }
@@ -132,6 +135,7 @@ export default function AdminDashboard() {
         previousPrice: newProduct.previousPrice,
         category: newProduct.category,
         src: newProduct.src,
+        stock: newProduct.stock,
       });
       toast.success("Product updated successfully!");
     } catch (error) {
@@ -194,6 +198,12 @@ export default function AdminDashboard() {
             onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
           />
           <input
+            type="number"
+            placeholder="Product Stock"
+            value={newProduct.stock}
+            onChange={(e) => setNewProduct({ ...newProduct, stock: e.target.value })}
+          />
+          <input
             type="text"
             placeholder="Product Category"
             value={newProduct.category}
@@ -223,6 +233,7 @@ export default function AdminDashboard() {
                 <th>Name</th>
                 <th>Previous Price</th>
                 <th>Current Price</th>
+                <th>Stock</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -233,6 +244,7 @@ export default function AdminDashboard() {
                   <td>{product.name}</td>
                   <td>${product.previousPrice}</td>
                   <td>${product.price}</td>
+                  <td>{product.stock}</td>
                   <td>
                     <button
                       className="edit-btn"
