@@ -7,5 +7,3 @@ export const OTP=()=>{
 
     return {otp:otp,expires:expires};
 };
-
-console.log(OTP())
