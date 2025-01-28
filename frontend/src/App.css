@@ -1,29 +1,35 @@
+body{
+    margin: 0;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+}
+
 .auth-container {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #f7fafc;
-    font-family: "Arial", sans-serif; /* Changed the font family */
+    font-family: "Arial", sans-serif;
 }
 
 .auth-box {
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.35); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 8px;
-    margin: 0 15px;
-    font-family: "Arial", sans-serif; /* Changed the font family */
+    font-family: "Arial", sans-serif;
+    text-align: center;
 }
 
 .auth-title {
-    font-size: 28px; /* Increased font size */
+    font-size: 28px; 
     font-weight: 600;
     text-align: center;
     margin-bottom: 20px;
-    font-family: "Verdana", sans-serif; /* Changed font family */
+    font-family: "Verdana", sans-serif; 
 }
 
 .auth-form {
@@ -31,109 +37,213 @@
     flex-direction: column;
 }
 
-.auth-label {
-    font-size: 16px; /* Increased font size */
-    margin-bottom: 8px;
-    color: #333;
-    font-family: "Arial", sans-serif; /* Changed the font family */
+.auth-form .inputBox{
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+    margin-left: 20px;
 }
 
-.auth-input {
-    padding: 12px; /* Increased padding */
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px; /* Increased font size */
-    font-family: "Arial", sans-serif; /* Changed font family */
-}
-
-.auth-button {
-    padding: 14px; /* Increased padding */
-    background-color: #3182ce;
-    color: white;
+.auth-form .inputBox input {
+    position: relative;
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px 10px;
+    background: transparent;
+    outline: none;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 18px; /* Increased font size */
-    font-family: "Arial", sans-serif; /* Changed font family */
+    box-shadow: none;
+    color: black;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+    z-index: 10;
+    box-sizing: border-box;
+}
+  
+.auth-form .inputBox input:-webkit-autofill,
+.auth-form .inputBox input:-webkit-autofill:hover,
+.auth-form .inputBox input:-webkit-autofill:focus,
+.auth-form .inputBox input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #000;
+  border: none;
 }
 
-.auth-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.auth-form .inputBox span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 20px 0px 10px;
+  pointer-events: none;
+  color: black;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+}
+
+.auth-form .inputBox input:valid ~ span,
+.auth-form .inputBox input:focus ~ span {
+  color: black;    
+  margin-top: 12px;
+  font-size: 0.80em;
+  transform: translateY(-34px);
+}
+
+.auth-form .inputBox i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.auth-form .inputBox input:valid ~ i,
+.auth-form .inputBox input:focus ~ i {
+  height: 35px;
+}
+
+.auth-button{
+  margin: 20px 0 20px 20px;
+  width: 100%;
+  max-width: 300px;
+  border: none;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 7px 10px;
+  background-color: white;
+  box-shadow: black 1px 2px 10px 1px;
+  color: black;
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+}
+
+.auth-button:hover{
+  box-shadow: black 2px 3px 10px 2px;
+  color: white;
+  background-color: black;
+}
+
+.auth-button:active{
+  transform: scale(0.9);
 }
 
 .auth-text {
-    
-    font-size: 16px; /* Increased font size */
-    color: #555;
+    margin: 20px 0;
+    font-size: 16px;
+    color: black;
     text-align: center;
-    font-family: "Arial", sans-serif; /* Changed font family */
+    font-family: "Arial", sans-serif; 
 }
 
 .auth-toggle {
     color: #3182ce;
     text-decoration: underline;
     cursor: pointer;
-    font-size: 16px; /* Increased font size */
-    font-family: "Arial", sans-serif; /* Changed font family */
+    font-size: 16px;
+    font-family: "Arial", sans-serif; 
 }
 
 .auth-resend {
     color: #3182ce;
     cursor: pointer;
-    font-size: 16px; /* Increased font size */
-    font-family: "Arial", sans-serif; /* Changed font family */
+    font-size: 16px; 
+    font-family: "Arial", sans-serif; 
 }
 
 .auth-resend:hover {
     text-decoration: underline;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-    .auth-box {
-        padding: 15px;
-    }
-
-    .auth-title {
-        font-size: 24px; /* Adjusted font size for smaller screens */
-    }
-
-    .auth-input {
-        font-size: 14px; /* Adjusted font size */
-    }
-
-    .auth-button {
-        font-size: 16px; /* Adjusted font size */
-    }
-
-    .auth-label {
-        font-size: 14px; /* Adjusted font size */
-    }
+.otp-input-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
 }
 
+.otp-input-container input {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    padding: 5px;
+    text-align: center;
+    margin: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    background-color: #f5f5f5;
+    transition: border-color 0.3s ease;
+  }
 
-@media (max-width: 480px) {
+  .otp-input-container input:focus {
+    border-color: #3182ce; 
+  }
+  
+  .otp-input-container input:invalid {
+    border-color: red; 
+  }
+  
+
+/* Responsive design */
+@media (max-width: 768px) {
+
     .auth-box {
-        padding: 10px;
+        padding: 20px;
         max-width: 90%;
     }
 
     .auth-title {
-        font-size: 20px; /* Adjusted font size */
+        font-size: 24px; 
     }
 
-    .auth-input {
-        font-size: 14px; /* Adjusted font size */
+    .auth-form .inputBox {
+        max-width: 100%; 
+        margin: 0 auto 15px;
+    
+    .auth-form .inputBox input {
+        font-size: 1em; 
+        padding: 12px; 
     }
 
     .auth-button {
-        font-size: 16px; /* Adjusted font size */
+        font-size: 16px;
+        max-width: 100%;
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .auth-box {
+        padding: 20px;
+        max-width: 90%;
     }
 
-    .auth-label {
-        font-size: 14px; /* Adjusted font size */
+    .auth-title {
+        font-size: 20px;
+    }
+
+    .auth-form .inputBox {
+        max-width: 100%; 
+        margin: 0 auto 15px;
+    }
+
+    .auth-form .inputBox input {
+        font-size: 1em;
+        padding: 10px;
+    }
+
+    .auth-button {
+        font-size: 16px;
+        max-width: 100%;
+        margin: 20px auto;
+        padding: 10px; 
     }
 }
 

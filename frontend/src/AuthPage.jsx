@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import OTPInput from 'react-otp-input';
 import './App.css';
 import { toast, ToastContainer } from "react-toastify"; // Importing toast
 import "react-toastify/dist/ReactToastify.css"; // Importing Toast styles
@@ -35,6 +36,10 @@ const AuthPage = () => {
 
   }
 
+  const handleOtpChange = (otpValue) => {
+    setOtp(otpValue);
+  };
+  
   const handleSendOtp = () => {
     if (!phone || phone.length!=10) {
       toast.error("Please enter a valid phone number!"); // Error toast for missing phone number
@@ -137,33 +142,20 @@ const AuthPage = () => {
 
         {isLogin ? (
           <div className="auth-form">
-            <label htmlFor="email" className="auth-label">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="auth-input"
-            />
-            <label htmlFor="password" className="auth-label">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="auth-input"
-            />
+            <div className="inputBox">
+                <input type="email" id="email"  value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <span>Email</span>
+                <i></i>
+            </div>
+            <div className="inputBox">
+                <input type="password" id="password"  value={password} onChange={(e) => setPassword(e.target.value)} required />
+                <span>Password</span>
+                <i></i>
+            </div>
             <button
               className="auth-button"
               onClick={handleLogin}
-              disabled={!email || !password}
-            >
+              disabled={!email || !password}>
               Login
             </button>
           </div>
@@ -171,50 +163,46 @@ const AuthPage = () => {
           <div>
             {!otpSent ? (
               <div className="auth-form">
-                <label htmlFor="phone" className="auth-label">
-                  Phone Number
-                </label>
-                <input
-                  id="phone"
-                  type="tel"
-                  placeholder="Enter your phone number"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="auth-input"
-                />
+                <div className="inputBox">
+                  <input type="tel" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+                  <span>Phone Number</span>
+                  <i></i>
+                </div>
                 <button
                   className="auth-button"
                   onClick={handleSendOtp}
-                  disabled={!phone}
-                >
+                  disabled={!phone}>
                   Send OTP
                 </button>
               </div>
             ) : !isOtpVerified ? (
               <div className="auth-form">
-                <label htmlFor="otp" className="auth-label">
-                  OTP
-                </label>
-                <input
-                  id="otp"
-                  type="text"
-                  placeholder="Enter the OTP"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                  className="auth-input"
-                />
+                {/* <div className="inputBox">
+                  <input type="text" id="otp" value={otp} onChange={(e) => setOtp(e.target.value)} required />
+                  <span>OTP</span>
+                  <i></i>
+                </div> */}
+                <div className="otp-input-container">
+                  <OTPInput
+                    value={otp}
+                    onChange={handleOtpChange}
+                    numInputs={6}
+                    isInputNum={true}
+                    shouldAutoFocus
+                    renderSeparator={<span>-</span>}
+                    renderInput={(props) => <input {...props} />}/>
+                </div>
                 <button
                   className="auth-button"
                   onClick={handleVerifyOtp}
-                  disabled={!otp}
-                >
+                  disabled={!otp}>
                   Verify OTP
                 </button>
                 <p className="auth-text">
                   Didn’t receive the OTP?{" "}
-                  <button onClick={handleSendOtp} className="auth-resend">
+                  <span onClick={handleSendOtp} className="auth-resend">
                     Resend
-                  </button>
+                    </span>
                 </p>
               </div>
             ) : (
