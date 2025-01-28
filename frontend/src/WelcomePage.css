@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 .slider-container {
     height: 80vh;
@@ -30,7 +30,7 @@
 
 .slider-container .list .item .content {
     position: absolute;
-    font-family: "Orbitron", serif;
+    font-family: "Noto Sans", serif;
     top: 10%;
     width: 100%;
     max-width: 80%;
