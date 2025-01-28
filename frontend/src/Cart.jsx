@@ -60,6 +60,8 @@ const Cart = ({ cart, toggleCart, handleBuy }) => {
                                 handleBuy={handleBuy}
                                 toggleCart={toggleCart}
                                 totalAmount={totalAmount}
+                                cartItems={cart}
+                                address={address}
                             />
                         </Elements>
                     )}

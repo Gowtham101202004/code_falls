@@ -1,122 +1,116 @@
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { useStripe, useElements, PaymentRequestButtonElement } from '@stripe/react-stripe-js';
 import 'react-toastify/dist/ReactToastify.css';
 import './Cart.css';
 import axios from 'axios';
 
-const Payment = ({ setShowPayment, setShowCODPopup, handleBuy, toggleCart, totalAmount, cartItems }) => {
+const Payment = ({ setShowPayment, setShowCODPopup, handleBuy, toggleCart, totalAmount, cartItems, address }) => {
     const [paymentMethod, setPaymentMethod] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
-    const [isGooglePayAvailable, setIsGooglePayAvailable] = useState(false);
-    const stripe = useStripe();
-    const elements = useElements();
-    const [dataUser,setDataUser]=useState();
+    const [userData, setUserData] = useState({});
     const serverPort = import.meta.env.VITE_SERVER_PORT;
 
     useEffect(() => {
-        const userData=JSON.parse(localStorage.getItem('userData'));
-        if(userData)
-            setDataUser(userData);
+        const storedUserData = JSON.parse(localStorage.getItem('userData'));
+        if (storedUserData) setUserData(storedUserData);
+    }, []);
 
-        const checkGooglePayAvailability = async () => {
-            if (!stripe) return;
+    const insertOrderData = async (data) => {
+        try {
+            console.log(data);
+            // const response = await axios.post(`${serverPort}/api/order/insert-order-data`, data);
+            // console.log('Order inserted:', response.data);
+        } catch (error) {
+            console.error('Error inserting order:', error);
+            toast.error('Failed to store order data.');
+        }
+    };
 
-            const paymentRequest = stripe.paymentRequest({
-                country: 'US', // Set country
-                currency: 'usd', // Set currency
-                total: {
-                    label: 'Total',
-                    amount: totalAmount * 100, // Stripe expects the amount in cents
-                },
+    const handleRazorpayPayment = async () => {
+        setIsProcessing(true);
+
+        try {
+            // Create order on the backend
+            const orderResponse = await axios.post(`${serverPort}/api/payment/create-razorpay-order`, {
+                amount: totalAmount * 100, // Razorpay expects amount in paise
             });
 
-            const canMakePayment = await paymentRequest.canMakePayment();
-            setIsGooglePayAvailable(!!canMakePayment);
-        };
+            const { id: order_id, currency } = orderResponse.data;
 
-        checkGooglePayAvailability();
-    }, [stripe, totalAmount]);
+            // Initialize Razorpay
+            const options = {
+                key: import.meta.env.VITE_RAZORPAY_KEY, // Razorpay key
+                amount: totalAmount * 100,
+                currency: currency,
+                name: 'Online Platform for Dessert Products',
+                description: 'Thank you for shopping with us!',
+                order_id: order_id,
+                handler: async function (response) {
+                    // Successful payment
+                    toast.success('Payment successful!');
+                    insertOrderData({
+                        username: userData.name,
+                        amount: totalAmount,
+                        type: 'Razorpay',
+                        address: address,
+                        products: cartItems.map((item) => item.name).join(', '),
+                        payment_id: response.razorpay_payment_id,
+                    });
 
-    const InsertOrderData=async(data)=>{
-        try {
-            const res=await axios.post("http://localhost:8080/api/order/insert-order-data",data);
-            console.log(res);
+                    handleBuy();
+                    toggleCart();
+                    setShowPayment(false);
+                },
+                prefill: {
+                    name: userData.name,
+                    email: userData.email,
+                    contact: userData.phone || '',
+                },
+                theme: {
+                    color: '#F37254',
+                },
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.open();
         } catch (error) {
-            console.log(error);
-            
+            console.error('Error initializing Razorpay:', error);
+            toast.error('Failed to process payment.');
+        } finally {
+            setIsProcessing(false);
         }
-    }
-    const handlePayment = async () => {
+    };
+
+    const handleCashOnDelivery = () => {
+        setShowCODPopup(true);
+        setTimeout(() => {
+            toast.success('Order placed successfully. Pay on delivery!');
+            insertOrderData({
+                username: userData.name,
+                amount: totalAmount,
+                type: 'Cash on Delivery',
+                address: address,
+                products: cartItems.map((item) => item.name).join(', '),
+            });
+
+            handleBuy();
+            toggleCart();
+            setShowPayment(false);
+            setShowCODPopup(false);
+        }, 2000);
+    };
+
+    const handlePayment = () => {
         if (!paymentMethod) {
             toast.error('Please select a payment method!');
             return;
         }
 
-        setIsProcessing(true); // Disable button to avoid multiple submissions
-
-        if (paymentMethod === 'Google Pay') {
-            if (!stripe || !elements) {
-                setIsProcessing(false);
-                return;
-            }
-
-            try {
-                // Call your backend to create a payment intent for Google Pay
-                const res = await fetch(serverPort + 'api/payment/create-payment-intent', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ amount: totalAmount * 100 }), // Stripe expects the amount in cents
-                });
-
-                const data = await res.json();
-                const clientSecret = data.clientSecret;
-
-
-
-                // Confirm Payment via Google Pay using Stripe
-                const confirmResult = await stripe.confirmPayment(clientSecret, {
-                    payment_method: {
-                        google_pay: elements.getElement(PaymentRequestButtonElement),
-                    },
-                });
-
-                if (confirmResult.error) {
-                    toast.error('Payment failed! ' + confirmResult.error.message);
-                } else {
-                    toast.success('Payment successful via Google Pay!');
-
-                    console.log(`Payment Type: ${paymentMethod}`);
-                    console.log(`Total Amount: $${totalAmount}`);
-                    InsertOrderData({username:dataUser.name,amount:totalAmount,type:paymentMethod});
-                    console.log('Products:', cartItems.map((item) => item.name).join(', '));
-
-                    handleBuy();
-                    toggleCart();
-                    setShowPayment(false);
-                }
-            } catch (error) {
-                toast.error('Error while processing payment. Please try again.');
-            }
+        if (paymentMethod === 'Razorpay') {
+            handleRazorpayPayment();
         } else if (paymentMethod === 'Cash on Delivery') {
-            setShowCODPopup(true);
-            setTimeout(() => {
-                toast.success('Order placed successfully. Pay on delivery!');
-                console.log(`Payment Type: ${paymentMethod}`);
-                console.log(`Total Amount: $${totalAmount}`);
-                InsertOrderData({username:dataUser.name,amount:totalAmount,type:paymentMethod});
-                console.log('Products:', cartItems.map((item) => item.name).join(', '));
-
-                handleBuy();
-                toggleCart();
-                setShowPayment(false);
-                setShowCODPopup(false);
-            }, 2000);
+            handleCashOnDelivery();
         }
-
-        setIsProcessing(false); // Re-enable button after processing
     };
 
     return (
@@ -126,10 +120,10 @@ const Payment = ({ setShowPayment, setShowCODPopup, handleBuy, toggleCart, total
                 <input
                     type="radio"
                     name="payment"
-                    value="Google Pay"
+                    value="Razorpay"
                     onChange={(e) => setPaymentMethod(e.target.value)}
                 />
-                Google Pay
+                Razorpay
             </label>
             <label>
                 <input
@@ -141,32 +135,14 @@ const Payment = ({ setShowPayment, setShowCODPopup, handleBuy, toggleCart, total
                 Cash on Delivery
             </label>
 
-            {paymentMethod === 'Google Pay' && isGooglePayAvailable && (
-                <div className="gpay-details">
-                    <PaymentRequestButtonElement
-                        options={{
-                            paymentRequest: stripe.paymentRequest({
-                                country: 'US',
-                                currency: 'usd',
-                                total: {
-                                    label: 'Total',
-                                    amount: totalAmount * 100,
-                                },
-                            }),
-                        }}
-                    />
-                </div>
-            )}
-
             <button
                 onClick={handlePayment}
                 className="pay-btn"
-                disabled={isProcessing} // Disable the button while payment is processing
+                disabled={isProcessing}
             >
                 {isProcessing ? 'Processing...' : 'Pay Now'}
             </button>
 
-            {/* Toast Notification */}
             <ToastContainer />
         </div>
     );

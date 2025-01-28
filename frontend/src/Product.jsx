@@ -50,7 +50,7 @@ const Product = () => {
 
     const handleBuy = () => {
         console.log('Proceeding to payment...');
-        setTimeout(() => { window.location.reload(); }, 1200);
+       
     };
 
     const filteredProducts = products.filter((product) => {

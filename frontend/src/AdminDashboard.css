@@ -97,4 +97,29 @@
     text-align: center;
     color: gray;
   }
+
+  .arrival-date-input {
+    width: 150px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 14px;
+  }
+  
+  .arrival-date-input:focus {
+    outline: none;
+    border-color: #4CAF50;
+  }
+  
+  .table-container table th, .table-container table td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .no-data {
+    text-align: center;
+    color: #888;
+  }
+  
   
