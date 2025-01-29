@@ -122,4 +122,14 @@
     color: #888;
   }
   
+
+  .admin-navigation{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    row-gap: 30px;
+  }
+  .admin-navigation button{
+    padding: 10px;
+  }
   

@@ -1,41 +1,29 @@
 import React, { useState } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import './AiChat.css';
+import axios from 'axios';
 
 function AiChat() {
-  const [prompt, setPrompt] = useState(''); // User's input message
-  const [response, setResponse] = useState(''); // AI's response
-  const [loading, setLoading] = useState(false); // Loading state for the AI response
-  const [error, setError] = useState(''); // Error message state
+  const [prompt, setPrompt] = useState(''); 
+  const [response, setResponse] = useState(''); 
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState('');
+  const serverPort=import.meta.env.VITE_SERVER_PORT;
 
-  // Create a new instance of GoogleGenerativeAI with your API key
-  const genAI = new GoogleGenerativeAI('AIzaSyAgbU0vD_q2t6AsRX0U-D_wXKafT3rXlpQ');
-  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-  // Handle user input and AI response generation
-  const handleSubmit = async () => {
-    if (!prompt.trim()) return; // Ensure prompt is not empty
-  
+  const handleSubmit=async()=>{
     setLoading(true);
-    setError(''); // Clear any previous errors
-  
+    setError('');
     try {
-      // Generate the AI response using an available method
-      const aiResponse = await model.generate({
-        prompt: prompt,
-        maxTokens: 150, // Limit the length of the response
-      });
-  
-      // Set the AI response to the state
-      setResponse(aiResponse.text);
-    } catch (error) {
-      console.error('Error generating AI response:', error);
-      setError('Sorry, something went wrong. Please try again later.');
+      const res=await axios.post(`${serverPort}api/AI/ai-response`,{prompt:prompt});
+
+       setResponse(res.data);
+      setLoading(false);
+      } catch (error) {
+        console.log(error)
+        setError(error.message);
+        }
     }
-  
-    setLoading(false); // End loading state
-  };
-  
+
 
   return (
     <div className="ai-chat-container">

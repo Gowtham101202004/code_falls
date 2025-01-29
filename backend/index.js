@@ -26,5 +26,5 @@ app.use("/api/payment",paymentRouter);
 import orderRouter from './router/orderRouter.js';
 app.use("/api/order",orderRouter);
 
-// import orderRouter from './router/orderRouter.js';
-// app.use("/api/order",orderRouter);
+import AiRouter from './router/AIRouter.js';
+app.use("/api/AI",AiRouter);

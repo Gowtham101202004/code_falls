@@ -6,7 +6,7 @@ import Payment from './Payment'; // Import Payment component
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
-// Initialize Stripe with your public key (replace with your actual key)
+
 const stripePromise = loadStripe('pk_test_51QlQd8IYoEGZruyyOknzw5y4mKzO7eDbgFAGxyLWrdMjJzcHwFbJkpbb3Q29Z9sT1wXesevjCIArcuIqOrpcEBDj001Ly5TrIC');
 
 const Cart = ({ cart, toggleCart, handleBuy }) => {

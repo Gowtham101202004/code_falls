@@ -15,7 +15,7 @@ export default function AdminDashboard() {
   const [productCount, setProductCount] = useState(null);
   const [userCount, setUserCount] = useState(null);
   const [orderctCount, setOrderCount] = useState(null);
-  const [arrivalDate, setArrivalDate] = useState("");  // Store the edited arrival date
+  const [arrivalDate, setArrivalDate] = useState("");  
   const serverPort = import.meta.env.VITE_SERVER_PORT;
 
   // Fetch sample data
@@ -75,8 +75,7 @@ export default function AdminDashboard() {
         name: newProduct.name,
         price: parseFloat(newProduct.price),
         previousPrice: parseFloat(newProduct.price),
-        stock: parseInt(newProduct.stock),  // Store the initial price as previous price
-      };
+        stock: parseInt(newProduct.stock),       };
       InsertProduct(newProduct);
       setProducts((prev) => [...prev, newProductEntry]);
       setCounts((prev) => ({ ...prev, products: prev.products + 1 }));
@@ -117,7 +116,7 @@ export default function AdminDashboard() {
           ...product,
           name: newProduct.name,
           price: newProduct.price,
-          previousPrice: product.price,  // Update the previous price with the old price
+          previousPrice: product.price,           
           category: newProduct.category,
           src: newProduct.src,
           stock: newProduct.stock,
@@ -128,7 +127,6 @@ export default function AdminDashboard() {
     });
     setProducts(updatedProducts);
 
-    // Optionally send the update to the server
     try {
       await axios.put(serverPort + `api/product/update-product/${productToEditId}`, {
         name: newProduct.name,
@@ -143,15 +141,15 @@ export default function AdminDashboard() {
       toast.error("Unable to update product!");
     }
 
-    // Clear the form
+   
     setNewProduct({ name: "", price: "", src: "", category: "" });
     setProductToEditId(null);
   };
 
-  // Store the id of the product to be edited
+ 
   const [productToEditId, setProductToEditId] = useState(null);
 
-  // Handle arrival date editing
+  
   const handleArrivalDateChange = async (orderId) => {
     try {
       await axios.put(serverPort + `api/order/update-arrival-date/${orderId}`, {
@@ -169,13 +167,20 @@ export default function AdminDashboard() {
     }
   };
 
-  // Filtered products based on search input
+  
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchProduct.toLowerCase())
   );
 
   return (
     <div className="dashboard-container">
+    <div className="admin-navigation">
+      <button onClick={()=>navigate("/main/home")}>Go to Home</button>
+      <button onClick={()=>{
+        localStorage.clear();
+        navigate("/");
+      }}>Log Out</button>
+    </div>
       <h1>Admin Dashboard</h1>
 
       {/* Stats Section */}
@@ -317,7 +322,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Order Management Section */}
+      
       {/* Order Management Section */}
 <div className="section">
   <h2>Manage Orders</h2>
@@ -327,7 +332,8 @@ export default function AdminDashboard() {
         <tr>
           <th>ID</th>
           <th>User</th>
-          <th>Product Names</th> {/* Added new column for product names */}
+          <th>Address</th>
+          <th>Product Names</th> 
           <th>Total</th>
           <th>Arrival Date</th>
           <th>Actions</th>
@@ -338,7 +344,8 @@ export default function AdminDashboard() {
           <tr key={order._id}>
             <td>{order._id}</td>
             <td>{order.username}</td>
-            <td>{order.products || "No Products"}</td> {/* Display product names string */}
+            <td>{order.address}</td>
+            <td>{order.products || "No Products"}</td> 
             <td>₹{order.amount}</td>
             <td>
               {order.arrivalDate === "Processing..." ? (

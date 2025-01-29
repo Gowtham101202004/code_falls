@@ -18,8 +18,8 @@ const Payment = ({ setShowPayment, setShowCODPopup, handleBuy, toggleCart, total
     const insertOrderData = async (data) => {
         try {
             console.log(data);
-            // const response = await axios.post(`${serverPort}/api/order/insert-order-data`, data);
-            // console.log('Order inserted:', response.data);
+            const response = await axios.post(`${serverPort}api/order/insert-order-data`, data);
+            console.log('Order inserted:', response.data);
         } catch (error) {
             console.error('Error inserting order:', error);
             toast.error('Failed to store order data.');
