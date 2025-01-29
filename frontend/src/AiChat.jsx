@@ -3,39 +3,34 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import './AiChat.css';
 
 function AiChat() {
-  const [prompt, setPrompt] = useState(''); // User's input message
-  const [response, setResponse] = useState(''); // AI's response
-  const [loading, setLoading] = useState(false); // Loading state for the AI response
-  const [error, setError] = useState(''); // Error message state
+  const [prompt, setPrompt] = useState('');
+  const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState('');
 
-  // Create a new instance of GoogleGenerativeAI with your API key
   const genAI = new GoogleGenerativeAI('AIzaSyAgbU0vD_q2t6AsRX0U-D_wXKafT3rXlpQ');
   const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-  // Handle user input and AI response generation
   const handleSubmit = async () => {
-    if (!prompt.trim()) return; // Ensure prompt is not empty
+    if (!prompt.trim()) return;
   
     setLoading(true);
-    setError(''); // Clear any previous errors
+    setError(''); 
   
     try {
-      // Generate the AI response using an available method
       const aiResponse = await model.generate({
         prompt: prompt,
-        maxTokens: 150, // Limit the length of the response
+        maxTokens: 150, 
       });
   
-      // Set the AI response to the state
       setResponse(aiResponse.text);
     } catch (error) {
       console.error('Error generating AI response:', error);
       setError('Sorry, something went wrong. Please try again later.');
     }
   
-    setLoading(false); // End loading state
+    setLoading(false); 
   };
-  
 
   return (
     <div className="ai-chat-container">

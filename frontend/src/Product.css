@@ -27,37 +27,44 @@ header .cart {
 
 header .search-bar {
     display: flex;
-    padding: 0;
-    border: none;
-}
-
-header .search-bar input {
+    align-items: center;
     width: 100%;
-    padding: 10px;
-    border: 1px solid #6b6b6b;
-    border-radius: 5px;
-    outline: none;
-    transition: border 0.3s ease;
-}
-
-header .search-bar input:focus {
-    border: 1px solid rgb(255, 106, 0);
-}
-
-header .search-bar .search-button {
-    position: relative;
-    background: black;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: #ccc;
+    max-width: 1400px;
+    margin: 0 auto;
+    border: 2px solid #979191;
+    border-radius: 25px;
+    padding: 5px 10px;
+    background-color: #f9f9f9;
   }
   
-  /* Change icon color on hover */
-  header .search-bar .search-button:hover i {
-    color: rgb(255, 106, 0); /* Hover color */
+  header .search-bar:hover {
+    border-color: rgb(255, 119, 0);
+    box-shadow: 0 0 5px rgba(255, 119, 0, 0.6);
   }
-
+  
+  header .search-bar .search-button {
+    margin: 0 0 0 0;
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  header .search-bar input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8px;
+    background-color: transparent;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  header .search-bar input::placeholder {
+    color: #aaa;
+  }
+  
 .filter-section {
     font-size: large;
     margin-top: 20px;

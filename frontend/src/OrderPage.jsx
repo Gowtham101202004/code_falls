@@ -3,7 +3,7 @@ import {toast, ToastContainer} from 'react-toastify';
 import axios from 'axios';
 import './OrderPage.css';
 import {useNavigate} from 'react-router-dom';
-import Empty_Cart from './assets/empty-cart.svg';
+import empty_cart from './assets/no-results.png';
 
 const OrderPage = () => {
   const [orders, setOrders] = useState([]);
@@ -42,7 +42,7 @@ const OrderPage = () => {
           <h2>No Orders Yet!</h2>
           <p>Your order history is currently empty. Start shopping to place your first order.</p>
           <div className="empty-icon">
-            <img src={Empty_Cart} alt="empty cart" width="150" />
+            <img src={empty_cart} alt="empty cart" width="150" />
           </div>
           <button className="shop-now-btn" onClick={()=>navigate('/main/product')}>Start Shopping</button>
         </div>

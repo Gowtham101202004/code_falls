@@ -78,15 +78,14 @@ const Product = () => {
                     <span>Cart: {cart.length} items</span>
                 </div>
                 <div className="search-bar">
+                    <button className="search-button">
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </button>
                     <input
                         type="text"
                         placeholder="Search for products..."
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                    <button className="search-button">
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </button>
+                        onChange={(e) => setSearchQuery(e.target.value)}/>
                 </div>
             </header>
 
