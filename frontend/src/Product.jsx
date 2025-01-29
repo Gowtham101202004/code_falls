@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Product.css';
 import Cart from './Cart';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { toast,ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -72,9 +74,6 @@ const Product = () => {
         <>
         <div className="app">
             <header className="header">
-                <div className="logo">
-                    <h1>Flipazon</h1>
-                </div>
                 <div className="cart" onClick={toggleCart}>
                     <span>Cart: {cart.length} items</span>
                 </div>
@@ -85,7 +84,9 @@ const Product = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
-                    <button>Search</button>
+                    <button className="search-button">
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </button>
                 </div>
             </header>
 

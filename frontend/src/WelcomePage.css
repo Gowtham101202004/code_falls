@@ -70,28 +70,157 @@
     grid-template-columns: repeat(2, 125px);
     grid-template-rows: 40px;
     gap: 5px;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .slider-container .list .item .buttons button {
-    padding: 16px 24px;
+    margin: 0;
+    padding: 0;
     position: relative;
     font-size: 12px;
+    font-weight: bold;
     border-radius: 8px;
     border: none;
-    background-color: white;
-    color: white;
+    background-color: rgb(255, 106, 0);
+    color: black;
     cursor: pointer;
     transition: ease-in-out 0.3s;
-    background-image: linear-gradient(45deg, transparent 50%, black 50%);
+    background-image: linear-gradient(45deg, transparent 50%, white 50%);
     background-size: 300% 200%;
     background-position: bottom right;
 }
 
 .slider-container .list .item .buttons button:hover {
-    color: black;
+    background-color: rgb(255, 106, 0);
+    color: white;
     background-position: top left;
 }
+
+.about-box-section {
+    padding: 10px 20px 50px 20px;
+    background: linear-gradient(145deg, #f0f4f7, #ffffff);
+    text-align: center;
+  }
+  
+  .section-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: black;
+  }
+  
+  .feature-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+  }
+  
+  .box {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .icon {
+    font-size: 40px;
+    color: rgb(255, 106, 0);
+    margin-bottom: 15px;
+  }
+  
+  .box h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+    margin-bottom: 10px;
+  }
+  
+  .box p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* Styles for the Random Products Section */
+.random-products {
+    padding: 20px 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .random-products .section-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+  }
+  
+  .random-products .product-grid {
+    margin: 0 150px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .random-products .product-card {
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .random-products .product-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .random-products .product-grid-img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+  }
+  
+  .random-products .product-info {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .random-products .product-info h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .random-products .product-info p {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 15px;
+  }
+  
+  .random-products .product-info button {
+    background-color: black;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: ease-in-out 0.2s;
+  }
+  
+  .random-products .product-info button:hover {
+    transform: scale(1.07);
+    background-color: rgb(255, 106, 0);
+  }
+  
 
 @media only screen and (max-width: 768px) {    
 
@@ -129,4 +258,107 @@
     .slider-container .list .item .buttons button::after {
         top: 10px;
       }
+
+      .about-box-section {
+        padding: 30px 15px;
+      }
+    
+      .section-title {
+        font-size: 24px;
+        margin-bottom: 25px;
+      }
+    
+      .feature-boxes {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+      }
+    
+      .box {
+        width: 90%;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+    
+      .icon {
+        font-size: 36px;
+        margin-bottom: 10px;
+        color: rgb(255, 106, 0);
+      }
+    
+      .box h3 {
+        font-size: 18px;
+      }
+    
+      .box p {
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      .random-products {
+        padding: 20px 0;
+      }
+    
+      .random-products .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+      }
+    
+      .random-products .product-grid {
+        grid-template-columns: 1fr; /* Display products in a single column on mobile */
+        gap: 15px;
+        margin: 0 10px;
+      }
+    
+      .random-products .product-card {
+        border: 1px solid #e1e1e1;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+    
+      .random-products .product-card:hover {
+        transform: translateY(-5px);
+      }
+    
+      .random-products .product-grid-img {
+        width: 100%;
+        height: 200px;
+        object-fit: contain; /* Ensure the image fits within the container without being cut off */
+      }
+    
+      .random-products .product-info {
+        padding: 12px;
+        text-align: center;
+      }
+    
+      .random-products .product-info h4 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+    
+      .random-products .product-info p {
+        font-size: 0.9rem;
+        color: #888;
+        margin-bottom: 12px;
+      }
+    
+      .random-products .product-info button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+        background-color: black;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+    
+      .random-products .product-info button:hover {
+        background-color: rgb(255, 106, 0);
+      }
+  
 }
