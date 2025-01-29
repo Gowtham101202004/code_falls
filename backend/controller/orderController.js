@@ -1,6 +1,7 @@
 import OrderModel from '../model/orderModel.js'
 
 export const Insert_Order_Data=async(req,res)=>{
+    console.log(req.body);
     try {
         const newOrder=new OrderModel(req.body);
         await newOrder.save();

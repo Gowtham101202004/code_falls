@@ -24,6 +24,7 @@ const OrderPage = () => {
       try {
         const res = await axios.get(`${serverPort}api/order/get-order-data/${data.name}`);
         setOrders(res.data.data);
+        console.log(res.data.data)
         
       } catch (error) {
         console.log(error);
@@ -56,7 +57,7 @@ const OrderPage = () => {
               <div className="order-details">
                 <div className="order-item">
                   <strong>Placed On:</strong>
-                  <span>{order.placedDate}</span>
+                  <span>{order.createdAt}</span>
                 </div>
                 <div className="order-item">
                   <strong>Address:</strong>

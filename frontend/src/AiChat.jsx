@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import './AiChat.css';
+import axios from 'axios';
 
 function AiChat() {
+<<<<<<< HEAD
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false); 
@@ -31,6 +32,29 @@ function AiChat() {
   
     setLoading(false); 
   };
+=======
+  const [prompt, setPrompt] = useState(''); 
+  const [response, setResponse] = useState(''); 
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState('');
+  const serverPort=import.meta.env.VITE_SERVER_PORT;
+
+
+  const handleSubmit=async()=>{
+    setLoading(true);
+    setError('');
+    try {
+      const res=await axios.post(`${serverPort}api/AI/ai-response`,{prompt:prompt});
+
+       setResponse(res.data);
+      setLoading(false);
+      } catch (error) {
+        console.log(error)
+        setError(error.message);
+        }
+    }
+
+>>>>>>> 199b7313173dc62b0321b2e3e20e4a577081880a
 
   return (
     <div className="ai-chat-container">
