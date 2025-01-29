@@ -13,6 +13,18 @@ const order=new mongoose.Schema({
         type:String,
         required:true,
     },
+    address:{
+        type:String,
+        required:true,
+    },
+    arrivalDate:{
+        type:String,
+        default:'Processing...',
+    },
+    products:{
+        type:String,
+        required:true,
+    }
 },
 {
     timestamps:true,

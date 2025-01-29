@@ -10,17 +10,18 @@ export default function AdminDashboard() {
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
   const [orders, setOrders] = useState([]);
-  const [newProduct, setNewProduct] = useState({ src: "", name: "", price: "", category: "",stock:"" });
+  const [newProduct, setNewProduct] = useState({ src: "", name: "", price: "", category: "", stock: "" });
   const [searchProduct, setSearchProduct] = useState("");
   const [productCount, setProductCount] = useState(null);
   const [userCount, setUserCount] = useState(null);
   const [orderctCount, setOrderCount] = useState(null);
+  const [arrivalDate, setArrivalDate] = useState("");  // Store the edited arrival date
   const serverPort = import.meta.env.VITE_SERVER_PORT;
 
   // Fetch sample data
   useEffect(() => {
     const UserData = JSON.parse(localStorage.getItem('userData'));
-    if (!UserData || UserData?.isAdmin == undefined) navigate('/');
+    if (!UserData || UserData?.isAdmin === undefined) navigate('/');
 
     const fetchData = async () => {
       try {
@@ -74,20 +75,20 @@ export default function AdminDashboard() {
         name: newProduct.name,
         price: parseFloat(newProduct.price),
         previousPrice: parseFloat(newProduct.price),
-        stock:parseInt(newProduct.stock),  // Store the initial price as previous price
+        stock: parseInt(newProduct.stock),  // Store the initial price as previous price
       };
       InsertProduct(newProduct);
       setProducts((prev) => [...prev, newProductEntry]);
       setCounts((prev) => ({ ...prev, products: prev.products + 1 }));
-      setNewProduct({ name: "", price: "", src: "", category: "" ,stock:""});
+      setNewProduct({ name: "", price: "", src: "", category: "", stock: "" });
     }
   };
 
   // Delete a product
-  const handleDeleteProduct = async(id) => {
+  const handleDeleteProduct = async (id) => {
     setProducts((prev) => prev.filter((product) => product._id !== id));
     try {
-      await axios.delete(serverPort+`api/product/delete-product/${id}`);
+      await axios.delete(serverPort + `api/product/delete-product/${id}`);
       toast.success("Product deleted successfully!");
     } catch (error) {
       toast.error("Unable to delete product!");
@@ -103,7 +104,7 @@ export default function AdminDashboard() {
       price: productToEdit.price,
       category: productToEdit.category,
       src: productToEdit.src,
-      stock:productToEdit.stock,
+      stock: productToEdit.stock,
     });
     console.log(id);
     setProductToEditId(id);
@@ -149,6 +150,24 @@ export default function AdminDashboard() {
 
   // Store the id of the product to be edited
   const [productToEditId, setProductToEditId] = useState(null);
+
+  // Handle arrival date editing
+  const handleArrivalDateChange = async (orderId) => {
+    try {
+      await axios.put(serverPort + `api/order/update-arrival-date/${orderId}`, {
+        arrivalDate: arrivalDate,
+      });
+      toast.success("Arrival Date updated successfully!");
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order._id === orderId ? { ...order, arrivalDate: arrivalDate } : order
+        )
+      );
+      setArrivalDate(""); // Clear the input field
+    } catch (error) {
+      toast.error("Unable to update arrival date!");
+    }
+  };
 
   // Filtered products based on search input
   const filteredProducts = products.filter((product) =>
@@ -299,29 +318,68 @@ export default function AdminDashboard() {
       </div>
 
       {/* Order Management Section */}
-      <div className="section">
-        <h2>Manage Orders</h2>
-        <div className="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>User</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order) => (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{order.username}</td>
-                  <td>₹{order.amount}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      {/* Order Management Section */}
+<div className="section">
+  <h2>Manage Orders</h2>
+  <div className="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User</th>
+          <th>Product Names</th> {/* Added new column for product names */}
+          <th>Total</th>
+          <th>Arrival Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {orders.map((order) => (
+          <tr key={order._id}>
+            <td>{order._id}</td>
+            <td>{order.username}</td>
+            <td>{order.products || "No Products"}</td> {/* Display product names string */}
+            <td>₹{order.amount}</td>
+            <td>
+              {order.arrivalDate === "Processing..." ? (
+                <input
+                  type="date"
+                  value={arrivalDate}
+                  onChange={(e) => setArrivalDate(e.target.value)}
+                />
+              ) : (
+                
+                <span>{
+                  <input
+                  type="date"
+                  value={arrivalDate}
+                  onChange={(e) => setArrivalDate(e.target.value)}
+                />
+                
+                }{<p>{order.arrivalDate}</p>}
+                </span>
+                
+              )}
+            </td>
+            <td>
+            <button
+                  className="edit-btn"
+                  onClick={() => handleArrivalDateChange(order._id)}
+                >
+              {order.arrivalDate === "Processing..." ? (
+
+                  "Save Date"
+                
+              ):("Edit Date")}</button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
       <ToastContainer />
     </div>
   );

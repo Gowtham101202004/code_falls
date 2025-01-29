@@ -1,0 +1,114 @@
+.ai-chat-container {
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+  
+  .ai-chat-popup {
+    background-color: #ffffff;
+    border-radius: 12px;
+    width: 350px;
+    max-width: 90%;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ai-chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #ff5c5c;
+  }
+  
+  .close-btn:hover {
+    color: #ff0000;
+  }
+  
+  .ai-chat-content {
+    flex-grow: 1;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+  }
+  
+  .ai-chat-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .ai-chat-input input {
+    width: 75%;
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.3s;
+  }
+  
+  .ai-chat-input input:focus {
+    border: 1px solid #007bff;
+  }
+  
+  .ai-chat-input button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .ai-chat-input button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 600px) {
+    .ai-chat-container{
+        
+    }
+    .ai-chat-popup {
+      width: 100%;
+      max-width: 300px;
+    }
+  
+    .ai-chat-header span {
+      font-size: 16px;
+    }
+  
+    .ai-chat-content p {
+      font-size: 12px;
+    }
+  
+    .ai-chat-input input {
+      font-size: 12px;
+    }
+  
+    .ai-chat-input button {
+      font-size: 12px;
+    }
+  }
+  
