@@ -177,6 +177,7 @@ header .search-bar {
     header {
         flex-direction: column;
         align-items: flex-start;
+        background-color: white;
     }
 
     header .search-bar {
@@ -191,11 +192,12 @@ header .search-bar {
     .product-grid {
         grid-template-columns: 1fr 1fr;
     }
+    
     .cart{
         position:fixed;
         bottom: 20px;
         right: 20px;
-        background-color: #3498db;
+        background-color: rgb(255, 119, 0);
         color: #fff;
         padding: 10px 20px;
         cursor: pointer;
