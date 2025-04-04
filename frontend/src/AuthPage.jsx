@@ -107,7 +107,7 @@ const AuthPage = () => {
       localStorage.setItem("UserData",JSON.stringify(res.data.data));
       toast.success("Registered successfully!");
       setTimeout(()=>{
-        navigate('/home');
+        navigate('/main/home');
       },1500);
 
     }catch(err){

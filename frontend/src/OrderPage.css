@@ -109,6 +109,17 @@ body {
   color: #333;
 }
 
+.generate-bill-btn{
+  margin: 5px 50px;
+  background-color: black;
+  color: white;
+  transition: ease-in-out 0.3s;
+}
+
+.generate-bill-btn:hover{
+  background-color: rgb(255, 106, 0);
+}
+
 @media (max-width: 768px) {
   /* Page Container */
   .order-page-container {

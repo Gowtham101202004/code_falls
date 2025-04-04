@@ -23,10 +23,6 @@ function AiChat() {
         }
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 46719abd02daac0f90e6ade9f707aa58112e8e71
   return (
     <div className="ai-chat-container">
       <div className="ai-chat-popup">
